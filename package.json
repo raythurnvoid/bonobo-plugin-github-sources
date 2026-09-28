@@ -1,0 +1,31 @@
+{
+	"name": "@bonobo/plugin-github-sources",
+	"private": true,
+	"version": "0.1.0",
+	"type": "module",
+	"scripts": {
+		"build": "node scripts/build.mjs && pnpm run build:manifest",
+		"build:manifest": "node scripts/build-manifest.mjs",
+		"typecheck": "tsc --noEmit",
+		"lint": "eslint src/**/*.ts *.test.ts scripts/*.mjs eslint.config.js",
+		"check": "pnpm run typecheck && pnpm run lint",
+		"test": "vitest run archive.test.ts worker.test.ts"
+	},
+	"dependencies": {
+		"fflate": "0.8.3",
+		"zod": "4.6.5"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "5.20260928.1",
+		"@eslint/js": "9.39.1",
+		"@types/node": "^24.0.0",
+		"bonobo-plugin-sdk": "github:raythurnvoid/bonobo-plugin-sdk#973457877210fec8908f26fe17c8d727572aa54d",
+		"esbuild": "0.28.2",
+		"eslint": "9.39.1",
+		"globals": "16.5.0",
+		"typescript": "6.0.3",
+		"typescript-eslint": "8.70.1",
+		"vitest": "4.1.10"
+	},
+	"packageManager": "pnpm@10.33.0"
+}

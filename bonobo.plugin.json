@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"name": "github-sources",
+	"displayName": "GitHub Sources",
+	"version": "0.1.0",
+	"description": "Copies selected GitHub repositories into read-only Mounts for the chat agent.",
+	"compatibility": { "bonoboPluginRuntime": "1" },
+	"backend": {
+		"entry": "dist/backend/worker.js",
+		"moduleName": "plugin.js",
+		"compatibilityDate": "2026-09-28",
+		"compatibilityFlags": ["nodejs_compat"]
+	},
+	"configuration": {
+		"description": "Repos to copy, mount name and interval. Any plugin manager can add a repo the token can read. Workspace readers can read the copy. Use a read-only token limited to these repos.",
+		"defaultYaml": "mount:\n  name: github\nschedule:\n  everyMinutes: 1440\nrepositories:\n  - owner: raythurnvoid\n    repo: experiment--t3-chat\n    ref: main\n    volumeKey: t3-chat\n"
+	},
+	"mounts": [{
+		"id": "sources",
+		"description": "Read-only copies of the GitHub repositories listed in the settings.",
+		"configurationPath": ["mount", "name"]
+	}],
+	"events": [{
+		"type": "schedule.interval.elapsed",
+		"schedule": { "configurationPath": ["schedule", "everyMinutes"] }
+	}],
+	"pages": [],
+	"capabilities": ["workspace.volumes.write", "plugin.schedule.run", "outbound.fetch", "plugin.secrets.read", "plugin.data.read", "plugin.data.write"],
+	"outboundOrigins": ["https://api.github.com", "https://codeload.github.com"],
+	"secrets": [{
+		"name": "GITHUB_TOKEN",
+		"description": "Optional but recommended. Use a fine-grained token with Contents read access only to the chosen repositories. Private repositories need it."
+	}],
+	"files": [{
+		"path": "dist/backend/worker.js",
+		"sha256": "sha256:a86108cac35fe0961b6fdcd2f8677e4551537adfc11b95fdaa568085a4880c1a",
+		"bytes": 801924,
+		"contentType": "application/javascript"
+	}]
+}
