@@ -2,7 +2,7 @@
 	"schemaVersion": 1,
 	"name": "github-sources",
 	"displayName": "GitHub Sources",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Copies selected GitHub repositories into read-only Mounts for the chat agent.",
 	"compatibility": { "bonoboPluginRuntime": "1" },
 	"backend": {
@@ -29,7 +29,8 @@
 	"outboundOrigins": ["https://api.github.com", "https://codeload.github.com"],
 	"secrets": [{
 		"name": "GITHUB_TOKEN",
-		"description": "Optional but recommended. Use a fine-grained token with Contents read access only to the chosen repositories. Private repositories need it."
+		"description": "Optional but recommended. Use a fine-grained token with Contents read access only to the chosen repositories. Private repositories need it.",
+		"optional": true
 	}],
 	"files": [{
 		"path": "dist/backend/worker.js",
